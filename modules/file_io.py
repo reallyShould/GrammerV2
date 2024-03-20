@@ -6,6 +6,6 @@ def readFile(path):
             file.close()
             return text
         except:
-            return -1
+            return f"Read {path} error"
     else:
-        return -1
+        return f"File {path} exist?"

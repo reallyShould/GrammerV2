@@ -3,7 +3,7 @@
 WARNING: When working with files, it is better to use CMD.
 #
 # cp First file New folder - don't work
-# cp First\sfile New\sfolder - work
+# cp First\ file New\ folder - work
 #
 # by reallyShould
 
@@ -27,8 +27,7 @@ Other:
     cmd2 - cmd with output (testing)
     drop file to load on PC (unstable)
     cat <path> - read text file
-    dpkg <path> - unpack (work with .zip)
-    whoami - get your Telegram ID
+    touch <path> - create file
 Voice:
     `voice` - start recording
     `voice setseconds` <int>
