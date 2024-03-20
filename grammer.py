@@ -3,13 +3,13 @@ import os
 
 import modules.file_io as file_io
 import modules.message_io as mes_io
-import modules.system as syst
+import modules.system as system
 
 VERSION = "1.0"
-TOKEN_PATH = "token.txt"
-START = "data/message.txt"
-AUTOSTART = "data/on_start.txt"
-ADMIN = "admin.txt"
+TOKEN_PATH = f"{system.scriptPath}/token.txt"
+START = f"{system.scriptPath}/data/message.txt"
+AUTOSTART = f"{system.scriptPath}/data/on_start.txt"
+ADMIN = f"{system.scriptPath}/admin.txt"
 
 try:
     bot = telebot.TeleBot(file_io.readFile(TOKEN_PATH))
@@ -17,13 +17,14 @@ except:
     quit()
 
 try:
+    os.chdir(system.defaultStartFolder)
     bot.send_message(int(file_io.readFile(ADMIN)), f"""PC Started
     ==========
-    Script path: `{syst.scriptPath}`
+    Script path: `{system.scriptPath}`
     ==========
-    User name: `{syst.username}`
+    User name: `{system.username}`
     ==========
-    Path: `{syst.getCurrentDir()}`
+    Path: `{system.getCurrentDir()}`
     ==========
     Version: {VERSION}
     ==========""", parse_mode="Markdown")

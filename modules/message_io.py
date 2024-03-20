@@ -1,15 +1,32 @@
 import os
 
-SYSTEM = {
-    "LOCK": "Rundll32.exe user32.dll,LockWorkStation",
-    "SHUTDOWN": "shutdown /s /t 00",
-    "REBOOT": "shutdown /r /t 00",
-    "SLEEP": "rundll32 powrprof.dll,SetSuspendState 0,1,0",
-    "LOGOUT": "shutdown /l"
-}
+import modules.system as system
+
+def splitter(text):
+    text = text.replace('  ', ' ')
+    tmp = text.strip().split(' ')
+
+    out = []
+    for i in tmp:
+        i = i.replace('\\s', ' ')
+        out.append(i)
+    return out
 
 def messageProcessing(message:str):
-    if message in SYSTEM.keys():
-        os.system(SYSTEM[message])
+    if message in system.SYSTEM.keys():
+        os.system(system.SYSTEM[message])
         return f"Trying system: {message}"
+    
+    mes = splitter(message)
+    command = mes[0]
+    print(mes)
+    print(command)
+
+    if command == 'ls':
+        if len(mes) == 1:
+            return system.ls()
+        else:
+            return system.ls(mes[1])
+    else:
+        return "???"
     

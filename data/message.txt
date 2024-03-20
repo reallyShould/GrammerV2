@@ -3,7 +3,7 @@
 WARNING: When working with files, it is better to use CMD.
 #
 # cp First file New folder - don't work
-# cp First\ file New\ folder - work
+# cp First\sfile New\sfolder - work
 #
 # by reallyShould
 
