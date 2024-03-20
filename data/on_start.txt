@@ -1,0 +1,10 @@
+PC Started
+==========
+Script path: `<scriptPath>`
+==========
+User name: `<username>`
+==========
+Path: `<currentDir>`
+==========
+Version: <version>
+==========
