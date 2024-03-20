@@ -1,2 +1,4 @@
 debug/
 token.txt
+admin.txt
+*__pycache__

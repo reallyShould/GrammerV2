@@ -8,7 +8,7 @@ SYSTEM = {
     "LOGOUT": "shutdown /l"
 }
 
-def messageProcessing(message):
+def messageProcessing(message:str):
     if message in SYSTEM.keys():
         os.system(SYSTEM[message])
         return f"Trying system: {message}"
