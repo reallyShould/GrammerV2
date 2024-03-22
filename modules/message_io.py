@@ -24,7 +24,7 @@ def messageProcessing(message:str):
     if command == "ls":
         return system.ls(mes)
     elif command == "mkdir":
-        pass
+        return system.mkdir(mes)
     elif command == "cd":
         pass
     elif command == "cp":
