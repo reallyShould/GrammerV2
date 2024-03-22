@@ -26,7 +26,7 @@ def messageProcessing(message:str):
     elif command == "mkdir":
         return system.mkdir(mes)
     elif command == "cd":
-        pass
+        return system.cd(mes)
     elif command == "cp":
         pass
     elif command == "mv":

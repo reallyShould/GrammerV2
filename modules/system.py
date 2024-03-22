@@ -13,6 +13,16 @@ SYSTEM = {
     "LOGOUT": "shutdown /l"
 }
 
+def normalizeString(string:list) -> str:
+    path = string[1]
+    if path == "..":
+        return path
+    if path[1] == ":":
+        normalizePath = path
+    else:
+        normalizePath = f"{getCurrentDir()}\\{path}"
+    return normalizePath
+
 def getCurrentDir() -> str:
     return os.getcwd()
 
@@ -20,15 +30,9 @@ def ls(string:list) -> str:
     if len(string) == 1:
         path = getCurrentDir()
     else:
-        path = string[1]
-
+        path = normalizeString(string)
     try:
-        if path[1] == ":":
-            normalizePath = path
-        else:
-            normalizePath = f"{getCurrentDir()}\\{path}"
-
-        out = f'Folder: `{normalizePath}`\nElements: {len(os.listdir(path))}\n\n'
+        out = f'Folder: `{path}`\nElements: {len(os.listdir(path))}\n\n'
         files = os.listdir(path)
         for i in files:
             out += f'`{i}`\n==========\n'
@@ -37,7 +41,7 @@ def ls(string:list) -> str:
         except:
             return 'Huge list'
     except:
-        return f"Dir not exist: {normalizePath}"
+        return f"Dir not exist: {path}"
 
 def getScreen() -> str:
     with mss.mss() as sct:
@@ -47,12 +51,18 @@ def mkdir(string:list) -> str:
     try:
         if len(string) != 2:
             return "I need 2 arguments"
-        path = string[1]
-        if path[1] == ":":
-            normalizePath = path
-        else:
-            normalizePath = f"{getCurrentDir()}\\{path}"
-        os.makedirs(normalizePath)
-        return f"Done: {normalizePath}"
+        path = normalizeString(string)
+        os.makedirs(path)
+        return f"Done: {path}"
+    except Exception as err:
+        return f"{err}"
+    
+def cd(string:list) -> str:
+    try:
+        if len(string) != 2:
+            return "I need 2 arguments"
+        path = normalizeString(string)
+        os.chdir(path)
+        return ls(["ls"])
     except Exception as err:
         return f"{err}"
