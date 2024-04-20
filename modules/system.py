@@ -1,6 +1,8 @@
 import os
 import mss
 
+from modules.emoj import *
+
 username = os.getlogin()
 scriptPath = os.getcwd()
 defaultStartFolder = f'C:\\Users\\{username}\\Desktop'
@@ -32,16 +34,16 @@ def ls(string:list) -> str:
     else:
         path = normalizeString(string)
     try:
-        out = f'Folder: `{path}`\nElements: {len(os.listdir(path))}\n\n'
+        out = f'{FOLDER}Folder: `{path}`\n{FILE}Elements: {len(os.listdir(path))}\n\n'
         files = os.listdir(path)
         for i in files:
             out += f'`{i}`\n==========\n'
         try:
             return out
         except:
-            return 'Huge list'
+            return ERROR_STR("Huge list", "WARNING")
     except:
-        return f"Dir not exist: {path}"
+        return ERROR_STR(f"Dir not exist: {path}", "ERROR")
 
 def getScreen() -> str:
     with mss.mss() as sct:
@@ -50,7 +52,7 @@ def getScreen() -> str:
 def mkdir(string:list) -> str:
     try:
         if len(string) != 2:
-            return "I need 2 arguments"
+            return ERROR_STR("I need 1 argument!", "ERROR")
         path = normalizeString(string)
         os.makedirs(path)
         return f"Done: {path}"
@@ -60,9 +62,10 @@ def mkdir(string:list) -> str:
 def cd(string:list) -> str:
     try:
         if len(string) != 2:
-            return "I need 2 arguments"
+            return ERROR_STR("I need 1 argument!", "ERROR")
         path = normalizeString(string)
         os.chdir(path)
         return ls(["ls"])
     except Exception as err:
         return f"{err}"
+    

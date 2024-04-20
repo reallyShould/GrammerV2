@@ -1,39 +1,32 @@
-      Help menu
-
-WARNING: When working with files, it is better to use CMD.
-#
-# cp First file New folder - don't work
-# cp First\ file New\ folder - work
-#
-# by reallyShould
-
-Basic:
-    SHUTDOWN
-    REBOOT
-    SLEEP
-    LOCK
-    LOGOUT
-    screen - screenshot
-Other:
-    ls - list files
-    mkdir - create directory
-    cd <path> - change dir
-    cp <from> <to> - copy file
-    mv <from> <to> - move file
-    rm <path> - delete folder or files 
-    start - open file
-    getfile <from> - file from PC (limited)
-    cmd <command> - windows cmd (limited)
-    cmd2 - cmd with output (testing)
-    drop file to load on PC (unstable)
-    cat <path> - read text file
-    touch <path> - create file
-Voice:
-    `voice` - start recording
-    `voice setseconds` <int>
-    `voice setchunk` <int>
-    `voice setrate` <int> (48000, 44100)
-    `voice setchanells` <int>
-    `voice setdevice` <int>
-    `voice settings` - list of values
-    `voice list` - list of devices
+✉️Help menu
+⚠️WARNING: Do not use a space to specify paths, you must use "\ " for that. Example - ls C:\Dir\Spec\ Dir\
+🔌Basic:
+            SHUTDOWN
+            REBOOT
+            SLEEP
+            LOCK
+            LOGOUT
+            screen - screenshot
+🔑Other:
+            ls - list files
+            mkdir - create directory
+            cd <path> - change dir
+            cp <from> <to> - copy file
+            mv <from> <to> - move file
+            rm <path> - delete folder or files 
+            start - open file
+            getfile <from> - file from PC (limited)
+            cmd <command> - windows cmd (limited)
+            cmd2 - cmd with output (testing)
+            drop file to load on PC (unstable)
+            cat <path> - read text file
+            touch <path> - create file
+🔈Voice:
+            `voice` - start recording
+            `voice setseconds` <int>
+            `voice setchunk` <int>
+            `voice setrate` <int> (48000, 44100)
+            `voice setchanells` <int>
+            `voice setdevice` <int>
+            `voice settings` - list of values
+            `voice list` - list of devices

@@ -1,5 +1,6 @@
 import os
 
+from modules.emoj import *
 import modules.system as system
 
 def splitter(text):
@@ -46,5 +47,5 @@ def messageProcessing(message:str):
     elif command == "touch":
         pass
     else:
-        return "???"
+        return f"{QUESTION}Your command is not recognized"
     
