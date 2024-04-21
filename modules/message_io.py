@@ -31,21 +31,21 @@ def messageProcessing(message:str):
     elif command == "cp":
         return system.copy(mes)
     elif command == "mv":
-        pass
+        return system.move(mes)
     elif command == "rm":
-        pass
+        return system.remove(mes)
     elif command == "start":
-        pass
+        return system.start(mes)
     elif command == "getfile":
-        pass
+        return system.getfile(mes)
     elif command == "cmd":
-        pass
+        return system.cmdNoStd(mes)
     elif command == "cmd2":
-        pass
+        return system.cmdStd(mes)
     elif command == "cat":
-        pass
+        return system.cat(mes)
     elif command == "touch":
-        pass
+        return system.touch(mes)
     else:
         return f"{QUESTION}Your command is not recognized"
     

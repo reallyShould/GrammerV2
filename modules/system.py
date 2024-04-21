@@ -73,7 +73,7 @@ def cd(string:list) -> str:
 
 def copy(string:list) -> str:
     if len(string) != 3:
-            return ERROR_STR("I need 2 argument!", "ERROR")
+        return ERROR_STR("I need 2 argument!", "ERROR")
     fromPath = string[1]
     toPath =  string[2]
     try:
@@ -90,3 +90,68 @@ def copy(string:list) -> str:
         if err is FileExistsError:
             return ERROR_STR(f"File \"{fromPath}\" not exist", "ERROR")
         return ERROR_STR(f"Something wrong: {err}", "ERROR")
+    
+def remove(string:list) -> str:
+    if len(string) != 2:
+        return ERROR_STR("I need 1 argument!", "ERROR")
+    path = string[1]
+    try:
+        if os.path.isdir(path) == True:
+            rnpath = os.getcwd()
+            os.chdir(path)
+            filesForDel = os.listdir()
+            for i in filesForDel:
+                remove(["rm", i])
+            os.chdir(rnpath)
+            os.rmdir(path)
+            return f"{DONE}\"{path}\" has been deleted."
+        else:
+            os.remove(path)
+            return f"{DONE}\"{path}\" has been deleted."
+    except Exception as err:
+        return ERROR_STR(f"Something wrong: {err}", "ERROR")
+
+def remove1(string:list) -> str:
+    if len(string) != 2:
+        return ERROR_STR("I need 1 argument!", "ERROR")
+    path = string[1]
+    shutil.rmtree(path)
+
+def move(string:list) -> str:
+    if len(string) != 3:
+        return ERROR_STR("I need 2 argument!", "ERROR")
+    fromPath = string[1]
+    toPath =  string[2]
+    try:
+        if os.path.isdir(fromPath):
+            newFolder = f"{toPath}\\" + fromPath.split('\\')[-1]
+            os.mkdir(newFolder)
+            copy_tree(fromPath, newFolder)
+            remove(["", fromPath])
+            return f"{DONE}Copy {fromPath} to {toPath}"
+        else:
+            shutil.copy(fromPath, toPath)
+            os.remove(fromPath)
+            return f"{DONE}Move {fromPath} to {toPath}"
+    except Exception as err:
+        if err is FileExistsError:
+            return ERROR_STR(f"File \"{fromPath}\" not exist", "ERROR")
+        return ERROR_STR(f"Something wrong: {err}", "ERROR")
+
+def start(string:list) -> str:
+    return "Soon"
+
+def getfile(string:list) -> str:
+    return "Soon"
+
+def cmdNoStd(string:list) -> str:
+    return "Soon"
+
+def cmdStd(string:list) -> str:
+    return "Soon"
+
+def cat(string:list) -> str:
+    return "Soon"
+
+def touch(string:list) -> str:
+    return "Soon"
