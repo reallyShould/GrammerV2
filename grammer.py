@@ -26,14 +26,14 @@ try:
     os.chdir(system.defaultStartFolder)
     bot.send_message(ADMIN, f"""{PC}PC Started
 ==========
-{FILE}Script path: `{system.scriptPath}`
+{FILE}Script path: <code>{system.scriptPath}</code>
 ==========
-{USER}User: `{system.username}`
+{USER}User: <code>{system.username}</code>
 ==========
-{FOLDER}Current path: `{system.getCurrentDir()}`
+{FOLDER}Current path: <code>{system.getCurrentDir()}</code>
 ==========
 {PREF}Version: {VERSION}
-==========""", parse_mode="Markdown")
+==========""", parse_mode="HTML")
 except:
     print("n/a")
 
@@ -41,7 +41,7 @@ except:
 
 def start_message(message):
     if message.chat.id == ADMIN:
-        bot.send_message(message.chat.id, file_io.readFile(START), parse_mode="Markdown")
+        bot.send_message(message.chat.id, file_io.readFile(START), parse_mode="HTML")
     else:
         bot.send_message(message.chat.id, ACCESS_DENIED)
 
@@ -54,7 +54,7 @@ def text(message):
             bot.send_document(message.chat.id, open(screen, "rb"))
             os.remove(screen)
         else:
-            bot.send_message(message.chat.id, mes_io.messageProcessing(message.text), parse_mode="Markdown")
+            bot.send_message(message.chat.id, mes_io.messageProcessing(message.text), parse_mode="HTML")
     else:
         bot.send_message(message.chat.id, ACCESS_DENIED)
 

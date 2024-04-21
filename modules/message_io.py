@@ -29,7 +29,7 @@ def messageProcessing(message:str):
     elif command == "cd":
         return system.cd(mes)
     elif command == "cp":
-        pass
+        return system.copy(mes)
     elif command == "mv":
         pass
     elif command == "rm":

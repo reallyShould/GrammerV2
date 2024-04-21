@@ -1,6 +1,8 @@
 import os
 import mss
 
+import shutil
+from distutils.dir_util import copy_tree
 from modules.emoj import *
 
 username = os.getlogin()
@@ -34,10 +36,10 @@ def ls(string:list) -> str:
     else:
         path = normalizeString(string)
     try:
-        out = f'{FOLDER}Folder: `{path}`\n{FILE}Elements: {len(os.listdir(path))}\n\n'
+        out = f'{FOLDER}Folder: <code>{path}</code>\n{FILE}Elements: {len(os.listdir(path))}\n\n'
         files = os.listdir(path)
         for i in files:
-            out += f'`{i}`\n==========\n'
+            out += f'<code>{i}</code>\n==========\n'
         try:
             return out
         except:
@@ -68,4 +70,23 @@ def cd(string:list) -> str:
         return ls(["ls"])
     except Exception as err:
         return f"{err}"
-    
+
+def copy(string:list) -> str:
+    if len(string) != 3:
+            return ERROR_STR("I need 2 argument!", "ERROR")
+    fromPath = string[1]
+    toPath =  string[2]
+    try:
+        if os.path.isdir(fromPath):
+            newFolder = f"{toPath}\\" + fromPath.split('\\')[-1]
+            os.mkdir(newFolder)
+            copy_tree(fromPath, newFolder)
+            
+            return f"{DONE}Copy {fromPath} to {toPath}"
+        else:
+            shutil.copy(fromPath, toPath)
+            return f"{DONE}Copy {fromPath} to {toPath}"
+    except Exception as err:
+        if err is FileExistsError:
+            return ERROR_STR(f"File \"{fromPath}\" not exist", "ERROR")
+        return ERROR_STR(f"Something wrong: {err}", "ERROR")

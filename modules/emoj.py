@@ -5,6 +5,7 @@ PREF = "🛠"
 QUESTION = "❓"
 PC = "🖥"
 LOCK = "🔒"
+DONE = "✅"
 
 errors = {
     "ERROR": "⛔️",

@@ -10,23 +10,23 @@
 🔑Other:
             ls - list files
             mkdir - create directory
-            cd <path> - change dir
-            cp <from> <to> - copy file
-            mv <from> <to> - move file
-            rm <path> - delete folder or files 
+            cd `path` - change dir
+            cp `from` `to` - copy file
+            mv `from` `to` - move file
+            rm `path` - delete folder or files 
             start - open file
-            getfile <from> - file from PC (limited)
-            cmd <command> - windows cmd (limited)
+            getfile `from` - file from PC (limited)
+            cmd `command` - windows cmd (limited)
             cmd2 - cmd with output (testing)
             drop file to load on PC (unstable)
-            cat <path> - read text file
-            touch <path> - create file
+            cat `path` - read text file
+            touch `path` - create file
 🔈Voice:
-            `voice` - start recording
-            `voice setseconds` <int>
-            `voice setchunk` <int>
-            `voice setrate` <int> (48000, 44100)
-            `voice setchanells` <int>
-            `voice setdevice` <int>
-            `voice settings` - list of values
-            `voice list` - list of devices
+            <code>voice</code> - start recording
+            <code>voice setseconds</code> `int`
+            <code>voice setchunk</code> `int`
+            <code>voice setrate</code> `int` (48000, 44100)
+            <code>voice setchanells</code> `int`
+            <code>voice setdevice</code> `int`
+            <code>voice secodeings</code> - list of values
+            <code>voice list</code> - list of devices
