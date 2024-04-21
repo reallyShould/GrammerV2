@@ -1,5 +1,6 @@
 import telebot
 import os
+import time
 
 import modules.file_io as file_io
 import modules.message_io as mes_io
@@ -57,7 +58,8 @@ def text(message):
     else:
         bot.send_message(message.chat.id, ACCESS_DENIED)
 
-try: 
-    bot.polling(non_stop=True)
-except:
-    pass
+while True:
+    try: 
+        bot.polling(non_stop=True)
+    except:
+        time.sleep(15)
