@@ -9,3 +9,7 @@ venv/
 Installer/.vs
 Installer/bin
 Installer/obj
+build
+dist
+*.exe
+*.spec

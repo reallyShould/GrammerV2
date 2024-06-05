@@ -7,14 +7,10 @@ using WinForms = System.Windows.Forms;
 
 namespace Installer
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private string defaultDir = Directory.GetCurrentDirectory();
-        private string grammerTestToken;
-        private string grammerURL = "https://github.com/reallyShould/WinWipe/releases/download/1.0/Grammer.exe";
+        private string grammerURL = "https://github.com/reallyShould/GrammerV2/releases/download/Last/GrammerV2.exe";
         private string grammerPath;
         private string grammerStart;
         private bool installed = false;
@@ -28,7 +24,7 @@ namespace Installer
         private void Init()
         {
             grammerPath = $"C:\\Users\\{user_name}\\AppData\\Roaming";
-            grammerStart = $"{grammerPath}\\Grammer.exe";
+            grammerStart = $"{grammerPath}\\GrammerV2.exe";
 
             if (File.Exists(grammerStart))
                 installed = true;
@@ -71,14 +67,11 @@ namespace Installer
                 client.DownloadFile(grammerURL, grammerStart);
             }
             StreamWriter writer = new StreamWriter($"{grammerPath}\\token.txt");
-            if (TokenTextBoxXAML.Text == "Token")
-            {
-                writer.Write(grammerTestToken);
-            }
-            else
-            {
-                writer.Write(TokenTextBoxXAML.Text);
-            }
+            writer.Write(TokenTextBoxXAML.Text);
+            writer.Close();
+
+            StreamWriter adm = new StreamWriter($"{grammerPath}\\admin.txt");
+            writer.Write(IDTextBoxXAML.Text);
             writer.Close();
 
             if (AutorunCheckerXAML.IsChecked == true)
@@ -95,7 +88,7 @@ namespace Installer
 
         private void DeleteButtonXAML_Click(object sender, RoutedEventArgs e)
         {
-            Kill("Grammer");
+            Kill("GrammerV2");
             System.Threading.Thread.Sleep(3000);
             Delete(grammerPath);
             try
