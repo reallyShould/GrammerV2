@@ -1,0 +1,23 @@
+✉️Help menu
+⚠️WARNING: Do not use a space to specify paths, you must use "\ " for that. Example - ls C:\Dir\Spec\ dir\
+🔌Basic:
+            SHUTDOWN
+            REBOOT
+            SLEEP
+            LOCK
+            LOGOUT
+            screen - screenshot
+🔑Other:
+            ls - list files
+            mkdir - create directory
+            cd "path" - change dir
+            cp "from" "to" - copy file
+            mv "from" "to" - move file
+            rm "path" - delete folder or files 
+            open - open file
+            getfile "from" - file from PC (limited)
+            cmd "command" - windows cmd (limited)
+            cmd2 - cmd with output (testing)
+            drop file to load on PC (unstable)
+            cat "path" - read text file
+            touch "path" - create file
