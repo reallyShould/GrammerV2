@@ -1,5 +1,5 @@
 ✉️Help menu
-⚠️WARNING: Do not use a space to specify paths, you must use "\ " for that. Example - ls C:\Dir\Spec\ Dir\
+⚠️WARNING: Do not use a space to specify paths, you must use "\ " for that. Example - ls C:\Dir\Spec\ dir\
 🔌Basic:
             SHUTDOWN
             REBOOT
@@ -10,23 +10,14 @@
 🔑Other:
             ls - list files
             mkdir - create directory
-            cd `path` - change dir
-            cp `from` `to` - copy file
-            mv `from` `to` - move file
-            rm `path` - delete folder or files 
-            start - open file
-            getfile `from` - file from PC (limited)
-            cmd `command` - windows cmd (limited)
+            cd "path" - change dir
+            cp "from" "to" - copy file
+            mv "from" "to" - move file
+            rm "path" - delete folder or files 
+            open - open file
+            getfile "from" - file from PC (limited)
+            cmd "command" - windows cmd (limited)
             cmd2 - cmd with output (testing)
             drop file to load on PC (unstable)
-            cat `path` - read text file
-            touch `path` - create file
-🔈Voice:
-            <code>voice</code> - start recording
-            <code>voice setseconds</code> `int`
-            <code>voice setchunk</code> `int`
-            <code>voice setrate</code> `int` (48000, 44100)
-            <code>voice setchanells</code> `int`
-            <code>voice setdevice</code> `int`
-            <code>voice secodeings</code> - list of values
-            <code>voice list</code> - list of devices
+            cat "path" - read text file
+            touch "path" - create file
