@@ -3,5 +3,8 @@ token.txt
 admin.txt
 *__pycache__
 .vscode
+<<<<<<< HEAD
 GrammerV2.code-workspace
+=======
+>>>>>>> ca2a6e71dbe645704a9e32961cd4ba2a437a9e5a
 venv/
