@@ -11,19 +11,22 @@ namespace Installer
     {
         private string defaultDir = Directory.GetCurrentDirectory();
         private string grammerURL = "https://github.com/reallyShould/GrammerV2/releases/download/Last/GrammerV2.exe";
-        private string grammerPath;
         private string grammerStart;
         private bool installed = false;
         private string taskName = "GrammerV2";
-        private string user_name = Environment.UserName;
+        static private string user_name = Environment.UserName;
+        private string grammerPathDefault = $"C:\\Users\\{user_name}\\AppData\\Roaming\\GrammerV2";
+        private string grammerPath;
+
 
         public MainWindow()
         {
+            grammerPath = grammerPathDefault;
             InitializeComponent();
+            Init();
         }
         private void Init()
         {
-            grammerPath = $"C:\\Users\\{user_name}\\AppData\\Roaming";
             grammerStart = $"{grammerPath}\\GrammerV2.exe";
 
             if (File.Exists(grammerStart))
@@ -52,6 +55,7 @@ namespace Installer
             if (dialog.SelectedPath != "")
             {
                 grammerPath = dialog.SelectedPath;
+                PathTextBoxXAML.Text = grammerPath;
             }
             Init();
         }
@@ -71,8 +75,8 @@ namespace Installer
             writer.Close();
 
             StreamWriter adm = new StreamWriter($"{grammerPath}\\admin.txt");
-            writer.Write(IDTextBoxXAML.Text);
-            writer.Close();
+            adm.Write(IDTextBoxXAML.Text);
+            adm.Close();
 
             if (AutorunCheckerXAML.IsChecked == true)
             {
