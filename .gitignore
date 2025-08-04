@@ -11,5 +11,6 @@ Installer/bin
 Installer/obj
 build
 dist
-*.exe
 *.spec
+python/pyvenv.cfg
+installer_config.json

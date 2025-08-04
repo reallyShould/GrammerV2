@@ -1,0 +1,3 @@
+TOKEN = "<TOKEN>"
+ADMIN = "<ID>"
+PYTHON = "<PYTHON>"
