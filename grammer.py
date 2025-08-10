@@ -2,29 +2,28 @@ import telebot
 import os
 import time
 
+import config
 import modules.file_io as file_io
 import modules.message_io as mes_io
 import modules.system as system
 from modules.emoj import *
 
-VERSION = "1.0"
-TOKEN_PATH = f"{system.scriptPath}\\token.txt"
+VERSION = "1.1b1"
 START = f"{system.scriptPath}\\data\\message.txt"
-AUTOSTART = f"{system.scriptPath}\\data\\on_start.txt"
-ADMIN = int(file_io.readFile(f"{system.scriptPath}\\admin.txt"))
 ACCESS_DENIED = f"{LOCK}Oops, it looks like this tool doesn't belong to you."
 
 
 os.chmod(system.scriptPath, 777)
 
 try:
-    bot = telebot.TeleBot(file_io.readFile(TOKEN_PATH))
+    bot = telebot.TeleBot(config.TOKEN)
 except:
+    print("No token")
     quit()
 
 try:
     os.chdir(system.defaultStartFolder)
-    bot.send_message(ADMIN, f"""{PC}PC Started
+    bot.send_message(config.ADMIN, f"""{PC}PC Started
 ==========
 {FILE}Script path: <code>{system.scriptPath}</code>
 ==========
@@ -40,7 +39,7 @@ except:
 @bot.message_handler(commands=["start", "info", "help"])
 
 def start_message(message):
-    if message.chat.id == ADMIN:
+    if message.chat.id == config.ADMIN:
         bot.send_message(message.chat.id, file_io.readFile(START), parse_mode="HTML")
     else:
         bot.send_message(message.chat.id, ACCESS_DENIED)
@@ -48,7 +47,7 @@ def start_message(message):
 @bot.message_handler(content_types=["text"])
 
 def text(message):
-    if message.chat.id == ADMIN:
+    if message.chat.id == config.ADMIN:
         if message.text == "screen":
             screen = system.getScreen()
             bot.send_document(message.chat.id, open(screen, "rb"))
@@ -67,7 +66,7 @@ def text(message):
 
 @bot.message_handler(content_types=["document"])
 def doc(message): 
-    if message.chat.id == ADMIN:
+    if message.chat.id == config.ADMIN:
         try:
             file_info = bot.get_file(message.document.file_id)
             downloaded_file = bot.download_file(file_info.file_path)
