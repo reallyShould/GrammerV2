@@ -117,7 +117,6 @@ class Installer:
             return False
 
     def _initial_check(self) -> bool:
-        """Perform initial system checks."""
         self._display_logo()
         print(f"{self._check_admin()} Admin rights{colorama.Style.RESET_ALL}")
         print(f"{self._check_internet('https://github.com', True)} Connection with https://github.com{colorama.Style.RESET_ALL}")
@@ -130,9 +129,11 @@ class Installer:
         return True
 
     def _install(self) -> None:
-        """Perform installation process."""
         try:
-            shutil.rmtree(self.config['path'], onerror=handle_remove_readonly)
+            try:
+                shutil.rmtree(self.config['path'], onerror=handle_remove_readonly)
+            except:
+                pass
             os.makedirs(self.config['path'], exist_ok=True)
             
             git.Repo.clone_from(self.repos, self.config['path'])

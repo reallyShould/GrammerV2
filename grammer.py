@@ -18,6 +18,7 @@ os.chmod(system.scriptPath, 777)
 try:
     bot = telebot.TeleBot(config.TOKEN)
 except:
+    print("No token")
     quit()
 
 try:
