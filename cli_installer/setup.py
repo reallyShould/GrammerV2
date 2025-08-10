@@ -141,7 +141,7 @@ class Installer:
             config_path = os.path.join(self.config['path'], "config.py")
             with open(config_path, "r") as f:
                 config_content = f.read()
-            config_content = config_content.replace("<PATH>", self.config["path"])
+            config_content = config_content.replace("<PATH>", self.config["path"]).replace("\\", "\\\\")
             config_content = config_content.replace("<TOKEN>", self.config["token"])
             config_content = config_content.replace("\"<ID>\"", self.config["telegram_id"])
             config_content = config_content.replace("<PYTHON>", f'{self.config["path"]}\\python\\Scripts\\pythonw.exe'.replace("\\", "\\\\"))
