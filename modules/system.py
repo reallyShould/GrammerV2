@@ -4,9 +4,10 @@ import subprocess
 import shutil
 from distutils.dir_util import copy_tree
 from modules.emoj import *
+import config
 
 username = os.getlogin()
-scriptPath = os.getcwd()
+scriptPath = config.PATH
 defaultStartFolder = f'C:\\Users\\{username}\\Desktop'
 
 SYSTEM = {
